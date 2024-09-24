@@ -23,7 +23,7 @@ class GeneratorPage extends StatelessWidget {
             Text('Full'),
               for (var item in appState.all)
                   ListTile(
-                    leading: Icon(Icons.favorite),
+                    leading: Icon(Icons.favorite_outline),
                     title: Text(item.asLowerCase)
                   ),
             SizedBox(height: 20),

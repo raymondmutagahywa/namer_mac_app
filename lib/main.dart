@@ -1,7 +1,8 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:namer_mac_app/favorites_page.dart';
 import 'package:namer_mac_app/generator_page.dart';
+import 'package:namer_mac_app/favorites_page.dart';
+import 'package:namer_mac_app/favorites_listbuilder.dart';
 import 'package:provider/provider.dart';
 import 'globals.dart' as globals;
 
@@ -38,15 +39,19 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   var favorites = <WordPair>[];
 
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } else {
-      favorites.add(current);
+  void toggleFavorite({int index=-1}) {
+
+    if (index>=0){
+            favorites.add(all[index]);
+    }   
+    else{  
+          if (favorites.contains(current)) {
+              favorites.remove(current);
+            } else {
+              favorites.add(current);
+            }
     }
     notifyListeners();
   }
@@ -69,6 +74,8 @@ switch(selectedIndex){
     page = GeneratorPage();
  case 1:
     page = FavoritesPage();
+ case 2:
+    page = FavoritesListbuilderPage();
  default:
   throw UnimplementedError('no widget for $selectedIndex');
 }
@@ -89,6 +96,10 @@ switch(selectedIndex){
                     NavigationRailDestination(
                       icon: Icon(Icons.favorite),
                       label: Text('Favorites'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.alarm_on_rounded),
+                      label: Text('Double'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
